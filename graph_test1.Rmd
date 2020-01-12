@@ -1,0 +1,60 @@
+---
+title: "每週一圖作業"
+output: html_document
+params:
+  組員: ["游崇翰"]  
+  學號: ["410573044"]
+---
+
+#### 環境設定
+
+以下為老師執行時一定會存在的環境設定
+```{r basic setup, message=FALSE, echo=TRUE, eval=T}
+library(dplyr); library(stringr); library(ggplot2); library(plotly); library(lubridate); library(readr); library(tidyr); library(showtext)
+
+font_add("QYuan","cwTeXQYuan-Medium.ttf") # 新增字體
+showtext_auto(enable=TRUE) #啟用字體
+theme_set(theme_classic())
+knitr::opts_chunk$set(out.width='80%', fig.asp=.75, fig.align='center', fig.showtext=T)
+options(encoding = "UTF-8")
+```
+
+#### 資料處理
+
+```{r data cleaning, echo=TRUE, eval=T}
+load("finalProject.Rda")
+scores <- data.frame(
+  semester=c(1,2,3,4,5,6,7,8),
+  ABC1=c(mean(gradeData[(1:10),2]),mean(gradeData[(11:20),2]),mean(gradeData[(21:27),2]),mean(gradeData[(28:35),2]),mean(gradeData[(36:43),2]),mean(gradeData[(44:51),2]),mean(gradeData[(52:57),2]),mean(gradeData[(58:62),2])),
+  ABC2=c(mean(gradeData[(63:72),2]),mean(gradeData[(73:83),2]),mean(gradeData[(84:93),2]),mean(gradeData[(94:103),2]),mean(gradeData[(104:111),2]),mean(gradeData[(112:119),2]),mean(gradeData[(120:125),2]),mean(gradeData[(126:129),2])),
+  ABC3=c(mean(gradeData[(130:140),2]),mean(gradeData[(141:152),2]),mean(gradeData[(153:161),2]),mean(gradeData[(162:169),2]),mean(gradeData[(170:175),2]),mean(gradeData[(176:181),2]),mean(gradeData[(182:186),2]),mean(gradeData[(187:190),2]))
+)
+```
+
+#### 繪圖程式
+
+```{r graph, echo=T, eval=T}
+
+scores%>%
+  gather(contains("ABC"),key="score11",value="score")%>%
+  ggplot(aes(x=semester,y=score,color=score11))+
+  geom_line(size=1)+
+  geom_point()+
+  scale_colour_hue(l = 80, c = 75)+
+ 
+  theme(legend.position = "none")+
+  annotate("text",x=7,y=72,label="Statistics student C",size=3,color="red")+
+  annotate("text",x=1.9,y=85,label="Accountancy student B",size=3,color="blue")+
+  annotate("text",x=6.3,y=85,label="Economics student A",size=3,color="#00AA00") ->scores_picture
+
+scores_picture
+gridSVG::grid.export("score.svg",addClasses=TRUE)
+  
+```
+
+
+#### 設計說明
+說明想傳達的訊息（必要）及設計想法（非必要）。寫在***之後
+
+*** 
+

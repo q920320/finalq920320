@@ -1,0 +1,48 @@
+---
+title: "finalq920320"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r basic setup, message=FALSE, echo=F, eval=T}
+library(dplyr); library(stringr); library(ggplot2); library(plotly); library(lubridate); library(readr); library(tidyr); library(showtext)
+
+font_add("QYuan","cwTeXQYuan-Medium.ttf") # 新增字體
+showtext_auto(enable=TRUE) #啟用字體
+theme_set(theme_classic())
+knitr::opts_chunk$set(out.width='100%', fig.asp=.75, fig.align='center', fig.showtext=T)
+```
+
+Sidebar {.sidebar}
+-----------------------------------------------------------------------
+<div id="answer"></div>
+
+<img onmousemove=answer.innerHTML="老師對不起，因為跟大家不熟而且明天之後要出國，所以不好意思去跟其他人同組，只能自己做專題，這幾天每天都在做這個，但礙於技術的問題只好盡量做，本來是想sidebar做按鈕來選取右圖的線，並且右圖每一個點滑鼠移上去可以看到細部的成績，但出了點意外沒做出來，不過還是有研究一些動態的東西放上來，結果最後一天publish不上來，真的很不好意思也謝謝老師這學期的教導我受益良多!" onmouseout="normalImg(this)" border="0" src="smiley.gif" alt="Smiley" width="32" height="32">
+
+
+<script>
+function bigImg(x) {
+  x.style.height = "64px";
+  x.style.width = "64px";
+}
+
+function normalImg(x) {
+  x.style.height = "32px";
+  x.style.width = "32px";
+}
+</script>
+
+
+Column {}
+-----------------------------------------------------------------------
+
+### 三位學生歷年平均分數
+
+
+<object id="score" data="score.svg" type="image/svg+xml" width="100%"></object>
+
+
+
+
